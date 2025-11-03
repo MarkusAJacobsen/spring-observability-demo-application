@@ -1,0 +1,13 @@
+pring:
+  application:
+    name: Observability Demo Application
+
+info:
+  name: \${spring.application.name}
+  version: ${version}
+  profile: \${spring.profiles.active}
+  
+server:
+  port: 8080
+  error:
+    include-message: always
