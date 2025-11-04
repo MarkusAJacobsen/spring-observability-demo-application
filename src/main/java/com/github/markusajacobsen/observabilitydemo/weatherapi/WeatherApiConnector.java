@@ -1,7 +1,5 @@
 package com.github.markusajacobsen.observabilitydemo.weatherapi;
 
-import com.github.markusajacobsen.observabilitydemo.domain.CurrentWeatherDto;
-import com.github.markusajacobsen.observabilitydemo.domain.IWeatherConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,9 +7,15 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+
+import com.github.markusajacobsen.observabilitydemo.domain.CurrentWeatherDto;
+import com.github.markusajacobsen.observabilitydemo.domain.IWeatherConnector;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import reactor.core.publisher.Mono;
 
 @Component
+@CircuitBreaker(name = "weather-api-connector")
 public class WeatherApiConnector implements IWeatherConnector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherApiConnector.class);

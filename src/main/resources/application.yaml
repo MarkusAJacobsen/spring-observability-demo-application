@@ -7,6 +7,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    user:
+      name: test
+      password: test
 
 info:
   name: \${spring.application.name}
@@ -24,6 +28,9 @@ management:
       show-details: always
       probes:
         enabled: true
+  health:
+    circuitbreaker:
+      enabled: true
   endpoints:
     web:
       exposure:
