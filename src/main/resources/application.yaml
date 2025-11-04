@@ -3,6 +3,10 @@ spring:
     name: Observability Demo Application
   config:
     import: optional:classpath:.env.properties
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 info:
   name: \${spring.application.name}
@@ -27,3 +31,7 @@ management:
         
 weatherapi:
   apikey: \${WEATHERAPI_APIKEY}
+database:
+  url: \${DATABASE_URL}
+  user: \${DATABASE_USER}
+  password: \${DATABASE_PASSWORD}
