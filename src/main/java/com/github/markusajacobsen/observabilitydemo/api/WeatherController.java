@@ -32,7 +32,7 @@ public class WeatherController {
             @PathVariable String city
     ) {
 
-        LOGGER.info("Getting current weather in city {city}", city);
+        LOGGER.info("Getting current weather in city {}", city);
 
         return new ResponseEntity<>(weatherService.getCurrentWeather(city), HttpStatus.OK);
     }
