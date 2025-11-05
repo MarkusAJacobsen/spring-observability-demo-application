@@ -2,6 +2,8 @@ package com.github.markusajacobsen.observabilitydemo.domain;
 
 import com.github.markusajacobsen.observabilitydemo.data.LocationEntity;
 import com.github.markusajacobsen.observabilitydemo.data.LocationRepository;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,10 +17,13 @@ public class WeatherService {
         this.locationRepository = locationRepository;
     }
 
+    @Cacheable(cacheNames = "current-weather-by-city", unless = "#result == null", key = "#city")
     public CurrentWeatherDto getCurrentWeather(String city) {
         CurrentWeatherDto current = weatherConnector.getCurrentWeather(city);
 
-        locationRepository.save(new LocationEntity(current.city(), current.region(), current.country()));
+        if (!locationRepository.existsByName(city)) {
+            locationRepository.save(new LocationEntity(current.city(), current.region(), current.country()));
+        }
 
         return current;
     }
