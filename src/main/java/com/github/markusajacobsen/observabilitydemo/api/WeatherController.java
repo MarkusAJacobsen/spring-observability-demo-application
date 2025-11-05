@@ -28,7 +28,7 @@ public class WeatherController {
             value = "/current/city/{city}",
             produces = {"application/json"}
     )
-    public ResponseEntity<CurrentWeatherDto> getProductCatalog(
+    public ResponseEntity<CurrentWeatherDto> getCurrentWeather(
             @PathVariable String city
     ) {
 
