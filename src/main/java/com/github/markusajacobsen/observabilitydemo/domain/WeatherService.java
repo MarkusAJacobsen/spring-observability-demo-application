@@ -18,7 +18,9 @@ public class WeatherService {
     public CurrentWeatherDto getCurrentWeather(String city) {
         CurrentWeatherDto current = weatherConnector.getCurrentWeather(city);
 
-        locationRepository.save(new LocationEntity(current.city(), current.region(), current.country()));
+        if (!locationRepository.existsByName(city)) {
+            locationRepository.save(new LocationEntity(current.city(), current.region(), current.country()));
+        }
 
         return current;
     }
