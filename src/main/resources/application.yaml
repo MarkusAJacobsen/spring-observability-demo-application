@@ -1,6 +1,8 @@
-pring:
+spring:
   application:
     name: Observability Demo Application
+  config:
+    import: optional:classpath:.env.properties
 
 info:
   name: \${spring.application.name}
@@ -22,3 +24,6 @@ management:
     web:
       exposure:
         include: info, health, prometheus
+        
+weatherapi:
+  apikey: \${WEATHERAPI_APIKEY}
